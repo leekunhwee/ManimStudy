@@ -9,7 +9,7 @@ python -m manim fourier_series.py FourierOfPiSymbol -pl
 
 <p align="center"><img src ="FourierOfPiSymbol.gif" /></p>
 
-Add following code at the and of fourier_series.py
+Add following code at the end of fourier_series.py
 ```python3
 class FourierOctocat(FourierOfTrebleClef):
     CONFIG = {
