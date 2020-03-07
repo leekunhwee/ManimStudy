@@ -26,8 +26,8 @@ class FourierOctocat(FourierOfTrebleClef):
         shape = SVGMobject("Octocat.svg")
         return shape
 ```
-
-And then run following command in Anaconda Prompt：
+Copy the Octocat.svg to the `~\manim\assets\svg_images` folder which is very important. (You need to creat such path if it does not exist.)
+And then, run following command in Anaconda Prompt：
 ```python3
 python -m manim fourier_series.py FourierOctocat -pl
 ```
