@@ -1,4 +1,6 @@
-# Pythagorean Theorem
+# Plot 3D via manim
+
+### [知乎原文](https://zhuanlan.zhihu.com/p/115474092)
 
 Import all packages：
 ```python3
