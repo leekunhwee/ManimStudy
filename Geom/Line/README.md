@@ -42,3 +42,5 @@ class Shapes(Scene):
         self.play(ShowCreation(line))
         self.wait(2)
 ```
+
+<p align="center"><img src ="Shapes3.gif" /></p>
