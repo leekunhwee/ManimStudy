@@ -196,7 +196,8 @@ class TipableVMobject(VMobject):
             return self.start_tip.get_start()
         else:
             return VMobject.get_start(self)
-
+    
+    # measure the length from start point to end point 
     def get_length(self):
         start, end = self.get_start_and_end()
         return get_norm(start - end)
@@ -429,17 +430,17 @@ class Line(TipableVMobject):
     # Initialization
     def __init__(self, start=LEFT, end=RIGHT, **kwargs):
         digest_config(self, kwargs)
-        self.set_start_and_end_attrs(start, end)
+        self.set_start_and_end_attrs(start, end) # 得到 -> self.start, self.end
         VMobject.__init__(self, **kwargs)
 
-    def generate_points(self):
+    def generate_points(self): 
         if self.path_arc:
             arc = ArcBetweenPoints(
                 self.start, self.end,
                 angle=self.path_arc
             )
             self.set_points(arc.points)
-        else:
+        else: # 由于CONFIG字典中已经将path_arc设置为None，所以直接执行该步
             self.set_points_as_corners([self.start, self.end])
         self.account_for_buff()
 
@@ -448,7 +449,7 @@ class Line(TipableVMobject):
         self.generate_points()
 
     def account_for_buff(self):
-        if self.buff == 0:
+        if self.buff == 0: # 由于CONFIG字典中已经将buff设置为0，所以直接执行该步并返回
             return
         #
         if self.path_arc == 0:
@@ -499,25 +500,30 @@ class Line(TipableVMobject):
             self.generate_points()
         return super().put_start_and_end_on(start, end)
 
+    # Get the directional vector from the start point to the end point
     def get_vector(self):
         return self.get_end() - self.get_start()
-
+    
+    # Get the unit vector of the directional vector
     def get_unit_vector(self):
         return normalize(self.get_vector())
-
+    
+    # Get theta of the polar coordinate
     def get_angle(self):
         return angle_of_vector(self.get_vector())
 
     def get_slope(self):
         return np.tan(self.get_angle())
-
-    def set_angle(self, angle):
+    
+    # Rotating along the start point
+    def set_angle(self, angle): 
         self.rotate(
             angle - self.get_angle(),
             about_point=self.get_start(),
         )
-
-    def set_length(self, length):
+        
+    # Scale about the center of the mobject.
+    def set_length(self, length): 
         self.scale(length / self.get_length())
 
     def set_opacity(self, opacity, family=True):
